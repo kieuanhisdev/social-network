@@ -1,5 +1,7 @@
 package vn.id.kieuanhdev.social.service;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import vn.id.kieuanhdev.social.models.User;
 import vn.id.kieuanhdev.social.repository.UserRepository;
@@ -8,13 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class UserServiceImplementation implements UserService {
 
     private final UserRepository userRepository;
-
-    public UserServiceImplementation(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public User regitsterUser(User user) {
@@ -44,8 +44,7 @@ public class UserServiceImplementation implements UserService {
         User user2 = findUserById(userId2); // nguoi bi follow
 
         user2.getFollowers().add(user1.getId());
-        user1.getFollowing().add(user2.getId());
-
+        user1.getFollowings().add(user2.getId());
         userRepository.save(user1);
         userRepository.save(user2);
 

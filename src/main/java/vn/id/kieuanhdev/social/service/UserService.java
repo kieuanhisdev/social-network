@@ -19,21 +19,21 @@ public interface UserService {
 //
 //    public User getUserById(int id);
 
-    public User regitsterUser(User user);
+    User regitsterUser(User user);
 
-    public User findUserById(int id);
+    User findUserById(int id);
 
-    public User findUserByEmail(String email);
+    User findUserByEmail(String email);
 
-    public User followUser(int userId1, int userId2);
+    User followUser(int userId1, int userId2);
 
-    public User updateUser(User user, int userId);
+    User updateUser(User user, int userId);
 
 
-    public List<User> getAllUsers();
+    List<User> getAllUsers();
 
-    public String deleteUser(User user);
+    String deleteUser(User user);
 
-    public List<User> searchUser(String query);
+    List<User> searchUser(String query);
 
 }

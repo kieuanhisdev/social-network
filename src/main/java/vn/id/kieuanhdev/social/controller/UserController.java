@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -18,41 +19,41 @@ public class UserController {
     }
 
     //post (create)
-    @PostMapping("/users")
+    @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.regitsterUser(user);
     }
 
     //get (1 user || all user)
     //1 user
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable Integer id) {
 
         return userService.findUserById(id);
     }
     //all user
-    @GetMapping("/users")
+    @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
     //put (updateuser)
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public User updateUser(@PathVariable Integer id, @RequestBody User user) {
        return userService.updateUser(user, id);
     }
     //delete (delete user)
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable Integer id) {
         User user = userService.findUserById(id);
         return userService.deleteUser(user);
     }
 
-    @PutMapping("/users/follow/{userId1}/{userId2}")
+    @PutMapping("/follow/{userId1}/{userId2}")
     public User followUserHandel(@PathVariable Integer userId1, @PathVariable Integer userId2) {
         return userService.followUser(userId1, userId2);
     }
 
-    @GetMapping("/users/search")
+    @GetMapping("/search")
     public List<User> searchUser(@RequestParam("query") String query){
 
         return userService.searchUser(query);
