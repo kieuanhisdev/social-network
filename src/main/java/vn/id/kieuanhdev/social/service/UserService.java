@@ -7,45 +7,33 @@ import vn.id.kieuanhdev.social.repository.UserRepository;
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class UserService {
-    private final UserRepository userRepository;
+public interface UserService {
+
+//    public User saveUser(User user);
+//
+//    public User updateUser(int id ,User user);
+//
+//    public String deleteUser(User user);
+//
+//    public List<User> getAllUsers();
+//
+//    public User getUserById(int id);
+
+    public User regitsterUser(User user);
+
+    public User findUserById(int id);
+
+    public User findUserByEmail(String email);
+
+    public User followUser(int userId1, int userId2);
+
+    public User updateUser(User user, int userId);
 
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    public List<User> getAllUsers();
 
-    public User saveUser(User user) {
-        User newUser = new User();
-        newUser.setEmail(user.getEmail());
-        newUser.setPassword(user.getPassword());
-        newUser.setFirstName(user.getFirstName());
-        newUser.setLastName(user.getLastName());
-        return userRepository.save(newUser);
-    }
+    public String deleteUser(User user);
 
-    public User updateUser(int id ,User user) {
-        User userToUpdate = userRepository.findById(id).get();
-        userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setPassword(user.getPassword());
-        userToUpdate.setFirstName(user.getFirstName());
-        userToUpdate.setLastName(user.getLastName());
-        return userRepository.save(userToUpdate);
-    }
-
-    public String deleteUser(User user) {
-        userRepository.delete(user);
-        return "User deleted";
-    }
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public User getUserById(int id) {
-        Optional<User> user =  userRepository.findById(id);
-        return user.orElse(null);
-    }
+    public List<User> searchUser(String query);
 
 }

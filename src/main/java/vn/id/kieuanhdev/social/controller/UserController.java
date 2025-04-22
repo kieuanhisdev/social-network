@@ -20,7 +20,7 @@ public class UserController {
     //post (create)
     @PostMapping("/users")
     public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+        return userService.regitsterUser(user);
     }
 
     //get (1 user || all user)
@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable Integer id) {
 
-        return userService.getUserById(id);
+        return userService.findUserById(id);
     }
     //all user
     @GetMapping("/users")
@@ -38,13 +38,24 @@ public class UserController {
     //put (updateuser)
     @PutMapping("/users/{id}")
     public User updateUser(@PathVariable Integer id, @RequestBody User user) {
-       return userService.updateUser(id, user);
+       return userService.updateUser(user, id);
     }
     //delete (delete user)
     @DeleteMapping("/users/{id}")
     public String deleteUser(@PathVariable Integer id) {
-        User user = userService.getUserById(id);
+        User user = userService.findUserById(id);
         return userService.deleteUser(user);
+    }
+
+    @PutMapping("/users/follow/{userId1}/{userId2}")
+    public User followUserHandel(@PathVariable Integer userId1, @PathVariable Integer userId2) {
+        return userService.followUser(userId1, userId2);
+    }
+
+    @GetMapping("/users/search")
+    public List<User> searchUser(@RequestParam("query") String query){
+
+        return userService.searchUser(query);
     }
 
 
